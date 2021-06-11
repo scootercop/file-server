@@ -3,6 +3,7 @@ import { Logger } from "./logger";
 import express = require("express");
 import { IncomingMessage, ServerResponse } from "http";
 import { ServerStore } from "./serverStore";
+import * as path from "path";
 
 const cliArguments = process.argv.slice(2);
 const rootFolder = cliArguments[0];
@@ -23,18 +24,18 @@ httpServer.get(
   }
 );
 
-httpServer.use(express.static(".."));
-httpServer.listen(8081);
+httpServer.use(express.static(path.join(__dirname, "..")));
+httpServer.listen(8001);
 
 const dataFileServer = hs.createServer({
   root: rootFolder,
-  proxy: "http://127.0.0.1:8081/",
+  proxy: "http://127.0.0.1:8001/",
   showDir: "false",
   autoIndex: "false",
   username: username,
   password: password,
 });
 
-dataFileServer.listen(8080);
+dataFileServer.listen(8000);
 
 console.log("server started");
