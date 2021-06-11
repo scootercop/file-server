@@ -6,7 +6,7 @@
   "scripts": {
     "build:dev": "cross-env AppSettings=development webpack --config './webpack.dev.js'",
     "build:prod": "cross-env AppSettings=production webpack --config './webpack.prod.js'",
-    "buildServer": "cross-env AppSettings=production webpack --config ./webpack.config.js --stats-error-details"
+    "buildServer": "cross-env AppSettings=production webpack --config ./webpack.config.js"
   },
   "keywords": [
     "file",
