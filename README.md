@@ -15,4 +15,5 @@ To start the server run the following commands in root folder in order
 You will run into an issue when u run npm install as the type def file for http-server is not up to date and i've used options that are not present yet. I have raised a PR to fix that in the original repo and will update version here once it is available. Till then goto the definition file for http-server and add the following 
 
  `username : string;` 
+ 
  `password: string;`
