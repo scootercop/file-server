@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import { FileFolderPath, FileFolderType } from "../src/ServiceContract";
+import { FileFolderPath, FileFolderType } from "../common/ServiceContract";
 class ServerStore {
   public fileFolderStructure: FileFolderPath;
 
