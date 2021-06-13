@@ -1,4 +1,4 @@
-import { FileFolderPath, FileFolderType } from "./ServiceContract";
+import { FileFolderPath, FileFolderType } from "../common/ServiceContract";
 
 export module HelperFunctions {
   export function sleep(ms: number) {
@@ -18,8 +18,14 @@ export module HelperFunctions {
   }
 
   export function fileSizeInText(size: string) {
-    if (!size) return "";
-    else return size + " KB";
+    const k = 1024;
+    const sizeInt = parseInt(size);
+    const dm = 2;
+    const sizes = ["KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+
+    const i = Math.floor(Math.log(sizeInt) / Math.log(k));
+
+    return parseFloat((sizeInt / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
   export function flatten(data: FileFolderPath[]) {

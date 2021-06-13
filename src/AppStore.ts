@@ -1,5 +1,5 @@
 import { computed, observable } from "mobx";
-import { FileFolderPath, FileFolderType } from "./ServiceContract";
+import { FileFolderPath, FileFolderType } from "../common/ServiceContract";
 
 class AppStore {
   @observable private _fileFolderStructure: FileFolderPath;
@@ -7,7 +7,6 @@ class AppStore {
   constructor() {
     this._fileFolderStructure = {
       name: "default",
-      path: "/",
       relativePath: "/",
       type: FileFolderType.Folder,
       children: [],

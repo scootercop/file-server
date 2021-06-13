@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FileFolderPath } from "./ServiceContract";
+import { FileFolderPath } from "../common/ServiceContract";
 
 class AppAPIService {
   constructor() {

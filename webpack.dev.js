@@ -16,22 +16,8 @@ module.exports = {
     rules: [
       {
         test: /\.ts(x?)$/,
+        use: ["babel-loader", "ts-loader"],
         exclude: /node_modules/,
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              cacheDirectory: true,
-            },
-          },
-          {
-            loader: "ts-loader",
-            options: {
-              transpileOnly: true,
-              experimentalWatchApi: true,
-            },
-          },
-        ],
       },
       {
         test: /\.js$/,
@@ -41,6 +27,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.DefinePlugin({
       "process.env.apiURI": JSON.stringify(processEnv.apiURI),
       "process.env.appURI": JSON.stringify(processEnv.appURI),
@@ -58,6 +45,6 @@ module.exports = {
   },
   output: {
     filename: "index.js",
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "dev"),
   },
 };

@@ -5,7 +5,6 @@ export enum FileFolderType {
 
 export interface FileFolderPath {
   name: string;
-  path: string;
   type: FileFolderType;
   size?: string;
   relativePath: string;

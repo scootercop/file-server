@@ -13,15 +13,15 @@ import {
   Stack,
   StackItem,
 } from "@fluentui/react";
-import { action, computed, Lambda, observable, reaction } from "mobx";
+import { computed, Lambda, observable, reaction } from "mobx";
 import { observer } from "mobx-react";
-import React from "react";
+import { Component } from "react";
 import { AppStore } from "./AppStore";
 import { HelperFunctions } from "./HelperFunctions";
-import { FileFolderPath, FileFolderType } from "./ServiceContract";
+import { FileFolderPath, FileFolderType } from "../common/ServiceContract";
 
 @observer
-export class FolderView extends React.Component {
+export class FolderView extends Component {
   @observable private _currentFolder: FileFolderPath;
 
   private disposer: Lambda;
@@ -158,7 +158,7 @@ export class FolderView extends React.Component {
           <>
             {item.type === FileFolderType.Folder && (
               <Link
-                key={item.path}
+                key={item.relativePath}
                 onClick={() => this.handleFileFolderClicked(item)}
               >
                 {item.name}
@@ -201,7 +201,10 @@ export class FolderView extends React.Component {
   };
 
   private backButtondisabled = () => {
-    return this.currentFolder.path === AppStore.fileFolderStructure.path;
+    return (
+      this.currentFolder.relativePath ===
+      AppStore.fileFolderStructure.relativePath
+    );
   };
 
   private handleFileFolderClicked = (file: FileFolderPath) => {
@@ -212,16 +215,19 @@ export class FolderView extends React.Component {
 
   @computed
   private get currentFolderPath() {
-    return this.currentFolder.path;
+    return this.currentFolder.relativePath;
   }
 
-  private getParent(data: FileFolderPath, path: string): FileFolderPath | null {
-    const element = data.children.some((e) => e.path === path);
+  private getParent(
+    data: FileFolderPath,
+    relativePath: string
+  ): FileFolderPath | null {
+    const element = data.children.some((e) => e.relativePath === relativePath);
     if (element) {
       return data;
     } else {
       for (let item in data.children) {
-        let mila = this.getParent(data.children[item], path);
+        let mila = this.getParent(data.children[item], relativePath);
         if (mila) return mila;
       }
       return null;
