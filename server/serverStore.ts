@@ -71,11 +71,14 @@ class ServerStore {
   }
 
   private setFolderSize(folder: FileFolderPath) {
-    folder.size = folder.children
-      .map((x) => x.size as string)
-      .reduce((x, y) =>
-        (parseInt(x as string) + parseInt(y as string)).toString()
-      );
+    folder.size =
+      folder.children.length > 0
+        ? folder.children
+            .map((x) => x.size as string)
+            .reduce((x, y) =>
+              (parseInt(x as string) + parseInt(y as string)).toString()
+            )
+        : " 0 B";
   }
 }
 
