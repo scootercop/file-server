@@ -181,11 +181,9 @@ export class FolderView extends Component {
       key: "size",
       name: "Size",
       className: this.classNames.verticalCenterAlign,
-      minWidth: 80,
+      minWidth: 60,
       onRender: (item: FileFolderPath) => {
-        return item.type === FileFolderType.File
-          ? HelperFunctions.fileSizeInText(item.size as string)
-          : "";
+        return HelperFunctions.sizeInText(item.size as string);
       },
     },
   ];

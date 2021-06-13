@@ -52,21 +52,30 @@ class ServerStore {
         );
         this.makePath(rootFolder, childFolder, filesInFolder);
         folder.children.push(childFolder);
+        this.setFolderSize(childFolder);
       } else if (f.isFile()) {
         folder.children.push({
           name: f.name,
           type: FileFolderType.File,
           relativePath: path.normalize(path.join(folder.relativePath, f.name)),
-          size: (
-            fs.statSync(
+          size: fs
+            .statSync(
               path.normalize(path.join(rootFolder, folder.relativePath, f.name))
-            ).size / 1000
-          ).toString(),
+            )
+            .size.toString(),
           children: [],
           ext: path.extname(f.name),
         });
       }
     });
+  }
+
+  private setFolderSize(folder: FileFolderPath) {
+    folder.size = folder.children
+      .map((x) => x.size as string)
+      .reduce((x, y) =>
+        (parseInt(x as string) + parseInt(y as string)).toString()
+      );
   }
 }
 

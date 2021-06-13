@@ -17,11 +17,14 @@ export module HelperFunctions {
     }
   }
 
-  export function fileSizeInText(size: string) {
+  export function sizeInText(size: string) {
+    if (size === "0") {
+      return "0 B";
+    }
     const k = 1024;
     const sizeInt = parseInt(size);
     const dm = 2;
-    const sizes = ["KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+    const sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
 
     const i = Math.floor(Math.log(sizeInt) / Math.log(k));
 
